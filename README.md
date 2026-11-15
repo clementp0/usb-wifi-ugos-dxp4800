@@ -2,6 +2,8 @@
 
 Connect a Ugreen NAS (UGOS Pro) to Wi-Fi with a USB dongle, and manage it from a small white web page on your local network — no SSH needed after setup.
 
+**[Install](#one-shot-install)** · **[Features](#what-you-get)** · **[Compatibility](#compatibility-kernel-61815-ugos-pro--debian-12)** · **[Security](#security-model)** · **[Desktop icon](#optional-a-desktop-icon-via-docker)** · **[Uninstall](#uninstall)** · **[Layout](#layout)**
+
 ![The web UI](docs/screenshot.png)
 
 > Status: Tested end-to-end DXP4800 Plus, UGOS Pro / Debian 12, kernel 6.18.15.

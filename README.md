@@ -73,26 +73,46 @@ sudo bash desktop-shortcut/setup-docker-link.sh 192.168.1.126   # or a fixed IP
 
 ## Compatibility (kernel 6.18.15, UGOS Pro / Debian 12)
 
-Run menu option **3** ("List compatible cards for this NAS") to see which of these your kernel can drive right now:
+Run menu option **3** ("List compatible cards for this NAS") to see which of these your kernel can drive right now, and option **2** to see which driver a plugged dongle actually uses.
 
-| Chipset | Driver | Example dongle | Verdict |
+### Tested on a DXP4800 Plus
+
+| Dongle | Chipset | Driver | Result |
 | --- | --- | --- | --- |
-| MediaTek MT7921AU (Wi-Fi 6) | `mt7921u` | BrosTrend AX9L (AXE3000) | kernel-ready, not yet tested here |
-| MediaTek MT7612U (AC1200) | `mt76x2u` | Alfa AWUS036ACM, Netgear A6210 | kernel-ready, not yet tested here |
-| MediaTek MT7610U (AC600) | `mt76x0u` | Panda PAU0B | reported working but slow (Reddit) |
-| Realtek RTL8822BU (AC1300) | `rtw88_8822bu` | TP-Link Archer T3U Plus | driver present; unverified |
-| Realtek RTL8187 (54 Mbit/s) | `rtl8187` | Netgear WG111v3 | **tested, works, slow** |
-| Atheros AR9271 (2.4 GHz) | `ath9k_htc` | Alfa AWUS036NHA, TP-Link TL-WN722N v1 | kernel-ready, not yet tested here |
+| Maxesla AC1200 (USB 3.0) | Realtek RTL8822BU | `rtw88_8822bu` | Pretty good; transfers hold up well even at long range. |
+| BrosTrend AC650 (AC1L) | Realtek RTL8811CU | `rtw88_8821cu` | Not the fastest, but fine for streaming films. |
+| Netgear WG111v3 | Realtek RTL8187 | `rtl8187` | Works, very slow. OK for light read/write only. Monitor mode works |
+
+Got another dongle working (or not)? Open an issue with the output of menu option **2**.
+
+### Kernel-ready, not yet tested here
+
+These chipsets have an in-kernel driver (and firmware) on UGOS Pro 6.18.15, so they *should* work without building anything:
+
+| Chipset | Driver | Example dongles | Notes |
+| --- | --- | --- | --- |
+| MediaTek MT7921AU (Wi-Fi 6, AXE3000) | `mt7921u` | BrosTrend AX9L, Comfast CF-953AX | best candidate for speed |
+| MediaTek MT7612U (AC1200) | `mt76x2u` | Alfa AWUS036ACM, Netgear A6210 | very solid Linux driver |
+| Realtek RTL8822BU (AC1300) | `rtw88_8822bu` | TP-Link Archer T3U Plus, D-Link DWA-181 | same driver as the Maxesla AC1200 |
+| MediaTek MT7610U (AC600) | `mt76x0u` | Panda PAU0B, Comfast CF-812AC | reported working but slow (Reddit) |
+| Realtek RTL8811CU/8821CU (AC600) | `rtw88_8821cu` | Comfast CF-811AC | same driver as the BrosTrend AC650 |
+| MediaTek MT7601U (2.4 GHz) | `mt7601u` | cheap "MT7601" nano dongles | |
+| Realtek RTL8188/8192 CU/EU (2.4 GHz) | `rtl8xxxu` | TP-Link TL-WN823N, many nano dongles | |
+| Ralink RT3070/RT5370 (2.4 GHz) | `rt2800usb` | Alfa AWUS036NH | |
+| Atheros AR9271 (2.4 GHz) | `ath9k_htc` | Alfa AWUS036NHA, TP-Link TL-WN722N v1, Panda PAU05 | |
+| Atheros AR9170 (2.4 GHz) | `carl9170` | Alfa AWUS036NHR (older) | |
+
+⚠️ Dongles often change chipset between hardware revisions (v1/v2/v3…) — check the exact chipset of the revision you buy.
 
 Check your own kernel before buying:
 
 ```bash
-ls /lib/modules/$(uname -r)/kernel/drivers/net/wireless/mediatek/mt76/
+ls /lib/modules/$(uname -r)/kernel/drivers/net/wireless/{mediatek/mt76,realtek,ath}/
 ```
 
 ## Uninstall
 
-From the menu (option **5**), or directly:
+From the menu (option **6**), or directly:
 
 ```bash
 sudo bash uninstall.sh          # remove the web UI only

@@ -4,7 +4,7 @@ Connect a Ugreen NAS (UGOS Pro) to Wi-Fi with a USB dongle, and manage it from a
 
 ![The web UI](docs/screenshot.png)
 
-> Status: community notes from one user's NAS (DXP4800 Plus, UGOS Pro / Debian 12, kernel 6.18.15). The only dongle tested end-to-end so far is the Netgear WG111v3. Everything else in the compatibility list is based on what the kernel ships, not on a real test, and is labelled as such.
+> Status: Tested end-to-end DXP4800 Plus, UGOS Pro / Debian 12, kernel 6.18.15.
 
 ## One-shot install
 

@@ -1,1 +1,0 @@
-SUBSYSTEM=="net", ACTION=="add", KERNEL=="wl*", TAG+="systemd", ENV{SYSTEMD_WANTS}="wifi-auto@%k.service"

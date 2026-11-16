@@ -1,8 +1,0 @@
-ctrl_interface=DIR=/run/wpa_supplicant GROUP=root
-country=FR
-
-network={
-    ssid="YOUR_WIFI"
-    psk="YOUR_PASSWORD"
-    priority=10
-}

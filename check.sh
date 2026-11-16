@@ -8,6 +8,9 @@
 #   bash check.sh check | drivers | compatible
 set -euo pipefail
 
+# modinfo / iw live in /usr/sbin, which is not in a normal user's PATH on Debian.
+PATH="$PATH:/usr/sbin:/sbin"
+
 # --- colours (disabled if not a terminal or NO_COLOR is set) ---
 if [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then
     B=$'\e[1m'; DIM=$'\e[2m'; R=$'\e[0m'; CY=$'\e[36m'; GR=$'\e[32m'; YE=$'\e[33m'; RD=$'\e[31m'; INV=$'\e[7m'
